@@ -13,6 +13,8 @@ const pool = new Pool({ database: 'KarsaHome', host: '/var/run/postgresql' });
 
 const defaults = {
   site_title: 'Karsa Dev — PlugPlay Server',
+  logo_path: '/assets/karsa-logo.png',
+  logo_alt: 'Karsa Dev logo',
   hero_badge: 'Karsa Dev Server',
   hero_title: 'Build, deploy, and organize small IT projects from one VPS.',
   hero_intro: 'This is the home page for Karsa Dev, a plug-and-play server workspace for portfolio pages, dashboards, experiments, and web apps.',
@@ -59,7 +61,7 @@ function page(raw) {
   <style>
     :root{color-scheme:dark;--bg:#070a12;--card:#101827;--text:#eef4ff;--muted:#9aa8bd;--line:rgba(255,255,255,.12);--blue:#65a8ff;--pink:#ff75b7}
     *{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at top left,rgba(101,168,255,.25),transparent 34%),radial-gradient(circle at 80% 10%,rgba(255,117,183,.18),transparent 30%),var(--bg);color:var(--text);min-height:100vh}
-    main{width:min(1080px,92vw);margin:auto;padding:76px 0 36px}.badge,.pill{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:9px 14px;background:rgba(255,255,255,.06);color:var(--muted)}.dot{width:9px;height:9px;background:#4ade80;border-radius:50%;box-shadow:0 0 18px #4ade80}
+    main{width:min(1080px,92vw);margin:auto;padding:76px 0 36px}.brandLogo{width:72px;height:72px;border-radius:22px;object-fit:cover;border:1px solid var(--line);background:rgba(255,255,255,.06);padding:8px;margin-bottom:18px}.badge,.pill{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:9px 14px;background:rgba(255,255,255,.06);color:var(--muted)}.dot{width:9px;height:9px;background:#4ade80;border-radius:50%;box-shadow:0 0 18px #4ade80}
     .logo{width:96px;height:96px;border-radius:28px;object-fit:cover;border:1px solid var(--line);background:rgba(255,255,255,.06);padding:10px;box-shadow:0 24px 80px rgba(0,0,0,.28)}
     h1{font-size:clamp(42px,7vw,84px);line-height:.96;letter-spacing:-.07em;margin:24px 0 20px;max-width:920px}.intro{font-size:20px;line-height:1.7;color:var(--muted);max-width:760px}.actions{display:flex;gap:14px;flex-wrap:wrap;margin:32px 0 48px}.btn{color:var(--text);text-decoration:none;border:1px solid var(--line);border-radius:16px;padding:14px 18px;background:rgba(255,255,255,.06);font-weight:700}.btn.primary{background:linear-gradient(135deg,var(--blue),var(--pink));color:#07111f;border:0}
     .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.card{min-height:210px;text-decoration:none;color:inherit;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.04));border:1px solid var(--line);border-radius:28px;padding:28px;transition:.2s}.card:hover{transform:translateY(-4px);border-color:rgba(101,168,255,.55)}.card h2{margin:0 0 12px;font-size:28px}.card p{color:var(--muted);line-height:1.65}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}footer{margin-top:54px;color:var(--muted)}
