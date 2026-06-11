@@ -16,7 +16,7 @@ const defaults = {
   hero_badge: 'Karsa Dev Server',
   hero_title: 'Build, deploy, and organize small IT projects from one VPS.',
   hero_intro: 'This is the home page for Karsa Dev, a plug-and-play server workspace for portfolio pages, dashboards, experiments, and web apps.',
-  logo_path: '/assets/logo.png',
+  logo_path: '/home-assets/karsa_project.png',
   logo_alt: 'Karsa Dev logo',
   primary_cta_label: 'Open Portfolio',
   primary_cta_url: '/portfolio/',
