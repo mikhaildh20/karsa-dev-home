@@ -13,7 +13,7 @@ const pool = new Pool({ database: 'KarsaHome', host: '/var/run/postgresql' });
 
 const defaults = {
   site_title: 'Karsa Dev — PlugPlay Server',
-  logo_path: '/assets/karsa-logo.png',
+  logo_path: '/home-assets/karsa-logo.svg',
   logo_alt: 'Karsa Dev logo',
   hero_badge: 'Karsa Dev Server',
   hero_title: 'Build, deploy, and organize small IT projects from one VPS.',
