@@ -65,11 +65,12 @@ Project cards use this pattern:
 
 Where `N` is the display order. Cards are rendered dynamically from the DB and sorted by `N`.
 
-Current known cards:
+Current known public cards:
 
 1. Portfolio → `https://portfolio.karsa-dev.my.id/`
-2. Hermes Dashboard → `https://hermes-dashboard.karsa-dev.my.id/`
-3. Kanban Verification System → `https://kvs-demo.karsa-dev.my.id/`
+2. Kanban Verification System → `https://kvs-demo.karsa-dev.my.id/`
+
+Hermes Dashboard is intentionally not listed publicly. Access it through an SSH tunnel to the local dashboard port when needed.
 
 ## UI/Content Direction
 

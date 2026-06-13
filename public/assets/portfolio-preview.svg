@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">Portfolio project preview</title>
+  <desc id="desc">Dark portfolio website preview with profile card, code panels, and project tiles.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.52" stop-color="#101827"/>
+      <stop offset="1" stop-color="#1f1140"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#65a8ff"/>
+      <stop offset="1" stop-color="#ff75b7"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="24" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.39 0 0 0 0 0.66 0 0 0 0 1 0 0 0 .6 0"/>
+      <feBlend in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="720" rx="44" fill="url(#bg)"/>
+  <circle cx="108" cy="80" r="160" fill="#65a8ff" opacity=".18" filter="url(#glow)"/>
+  <circle cx="1060" cy="98" r="190" fill="#ff75b7" opacity=".16" filter="url(#glow)"/>
+  <rect x="80" y="78" width="1040" height="564" rx="34" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.16)"/>
+  <rect x="110" y="108" width="410" height="504" rx="28" fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.14)"/>
+  <circle cx="196" cy="195" r="58" fill="url(#accent)"/>
+  <text x="196" y="211" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="42" font-weight="800" fill="#fff">MD</text>
+  <text x="110" y="318" font-family="Inter,Arial,sans-serif" font-size="44" font-weight="800" fill="#f2f7ff">Mikhail Daffa</text>
+  <text x="112" y="366" font-family="Inter,Arial,sans-serif" font-size="25" fill="#a8b7cf">Full-Stack Developer Enthusiast</text>
+  <rect x="112" y="414" width="142" height="38" rx="19" fill="#65a8ff" opacity=".9"/>
+  <text x="183" y="439" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="#06111f">Portfolio</text>
+  <rect x="272" y="414" width="184" height="38" rx="19" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.18)"/>
+  <text x="364" y="439" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700" fill="#dbe8ff">Projects</text>
+  <rect x="568" y="116" width="476" height="128" rx="24" fill="rgba(101,168,255,.12)" stroke="rgba(101,168,255,.26)"/>
+  <text x="602" y="166" font-family="JetBrains Mono,Consolas,monospace" font-size="22" fill="#8fc1ff">const profile = {</text>
+  <text x="636" y="204" font-family="JetBrains Mono,Consolas,monospace" font-size="20" fill="#cdd9ef">web, backend, systems</text>
+  <text x="602" y="232" font-family="JetBrains Mono,Consolas,monospace" font-size="22" fill="#8fc1ff">}</text>
+  <g fill="rgba(255,255,255,.08)" stroke="rgba(255,255,255,.14)">
+    <rect x="568" y="284" width="222" height="136" rx="22"/>
+    <rect x="822" y="284" width="222" height="136" rx="22"/>
+    <rect x="568" y="454" width="222" height="136" rx="22"/>
+    <rect x="822" y="454" width="222" height="136" rx="22"/>
+  </g>
+  <g font-family="Inter,Arial,sans-serif" fill="#edf5ff">
+    <text x="596" y="344" font-size="26" font-weight="800">Frontend</text>
+    <text x="850" y="344" font-size="26" font-weight="800">Backend</text>
+    <text x="596" y="514" font-size="26" font-weight="800">GitHub</text>
+    <text x="850" y="514" font-size="26" font-weight="800">Career</text>
+  </g>
+  <g fill="#9fb0c8" font-family="Inter,Arial,sans-serif" font-size="18">
+    <text x="596" y="378">UI & interaction</text>
+    <text x="850" y="378">API & database</text>
+    <text x="596" y="548">Real project logs</text>
+    <text x="850" y="548">Growth roadmap</text>
+  </g>
+</svg>
