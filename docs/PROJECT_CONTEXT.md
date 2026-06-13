@@ -1,114 +1,107 @@
 # Project Context — Karsa Home
 
-## Scope
+## Purpose
 
-This context is for Karsa Home only. Karsa Home is the root landing page for the `karsa-dev.my.id` VPS workspace and acts as the public project directory/navigation page.
+Karsa Home is the public root homepage/project directory for `karsa-dev.my.id`.
 
-Keep this context separate from KVS / Kanban Verification System, Mike Portfolio, Hermes Dashboard, and backend demo projects. Only touch other projects when the user explicitly asks to link to them or update their displayed card on Karsa Home.
+Use this context only for the homepage, public project cards, home assets, and root-domain routing. Do not mix it with KVS, Portfolio, or Hermes Dashboard internals unless the user explicitly asks to link/display them from Karsa Home.
 
-## Repository and Path
+## Repo / Path
 
-- Repository: `mikhaildh20/karsa-dev-home`
-- Server path: `/opt/projects/karsa-home`
+- Repo: `mikhaildh20/karsa-dev-home`
+- Path: `/opt/projects/karsa-home`
 - Branch: `main`
 
 ## Runtime
 
-- Runtime: Node.js + Express
+- App: Node.js + Express
+- Service: `karsa-home.service`
 - Internal bind: `127.0.0.1:3300`
-- Systemd service: `karsa-home.service`
+- Public URL: `https://karsa-dev.my.id`
 - Reverse proxy: Nginx
-- Deployment style: systemd + Nginx, not PM2
-- Public root domain: `https://karsa-dev.my.id`
+- Deployment pattern: systemd + Nginx, not PM2
 
 ## Database
 
 - DBMS: PostgreSQL
-- Database: `"KarsaHome"` — case-sensitive, quote it in psql/SQL when needed
+- Database: `"KarsaHome"` — quote it because it is case-sensitive
 - Main table: `mst_detail_settings`
-- Schema shape:
-  - `setting_key text primary key`
-  - `setting_value text not null default ''`
-  - `updated_at timestamptz not null default now()`
+- Prefer DB edits for content/card changes instead of hardcoding.
 
-Content is dynamic. Prefer editing `mst_detail_settings` over hardcoding content in HTML/JS unless a structural change is needed.
+Table shape:
 
-## Main Routes
+```txt
+setting_key text primary key
+setting_value text not null default ''
+updated_at timestamptz not null default now()
+```
 
-- `/` — dynamic Karsa Home page
+## Routes
+
+- `/` — dynamic homepage
 - `/health` — health check
-- `/api/settings` — current settings from PostgreSQL
-- `/home-assets/...` — public home assets via Nginx/project asset route
+- `/api/settings` — settings JSON
+- `/home-assets/...` — public home assets
 
-## Dynamic Settings
+Asset route uses dash: `/home-assets/...`, not `/home_assets/...`.
 
-Important keys currently used:
+## Dynamic Card Pattern
 
-- `site_title`
-- `logo_path`
-- `logo_alt`
-- `hero_badge`
-- `hero_title`
-- `hero_intro`
-- `search_placeholder`
-- `domain_label`
-- `server_status_label`
-- `footer_text`
+Project cards are DB-driven:
 
-Project cards use this pattern:
+```txt
+card_N_title
+card_N_body
+card_N_url
+card_N_image_path
+card_N_image_alt
+```
 
-- `card_N_title`
-- `card_N_body`
-- `card_N_url`
-- `card_N_image_path`
-- `card_N_image_alt`
+Current public cards:
 
-Where `N` is the display order. Cards are rendered dynamically from the DB and sorted by `N`.
+1. Portfolio
+   - URL: `https://portfolio.karsa-dev.my.id/`
+   - Image: `/home-assets/portfolio-preview.svg`
+2. Kanban Verification System
+   - URL: `https://kvs-demo.karsa-dev.my.id/`
+   - Image: `/home-assets/kvs-preview.svg`
 
-Current known public cards:
+Hermes Dashboard is intentionally private and must not be shown as a public Karsa Home card.
 
-1. Portfolio → `https://portfolio.karsa-dev.my.id/`
-2. Kanban Verification System → `https://kvs-demo.karsa-dev.my.id/`
+## Hermes Dashboard Boundary
 
-Hermes Dashboard is intentionally not listed publicly. Access it through an SSH tunnel to the local dashboard port when needed.
+- No public Karsa Home card.
+- No public `/dashboard-agent` route.
+- No public proxy to dashboard.
+- Access is through SSH tunnel to local port `127.0.0.1:9119` only.
+- Do not expose credentials or dashboard URLs publicly.
 
-## UI/Content Direction
+## UI Direction
 
-- Karsa Home is a clean dark themed dev-server homepage.
-- It should feel like a project directory / workspace entry point.
-- It currently uses search/filter for project cards.
-- Do not re-add old CTA buttons like “Open Portfolio” or “Open Hermes Dashboard” unless user explicitly asks.
-- Keep text in English for the site UI unless the user asks otherwise.
-- Logo/signature asset should use `/home-assets/karsa_project.png` when available.
-- Asset route uses dash: `/home-assets/...`, not `/home_assets/...`.
-
-## Context Boundaries
-
-When the user says switch to Karsa Home context, focus on:
-
-- `/opt/projects/karsa-home`
-- PostgreSQL database `"KarsaHome"`
-- table `mst_detail_settings`
-- root domain `https://karsa-dev.my.id`
-- project cards and homepage content
-- Nginx routing only as far as Karsa Home/root domain needs it
-
-Do not modify KVS code, Portfolio code, or Hermes Dashboard unless explicitly asked. If the user asks to add access to another web app, usually update/add a `card_N_*` group in `"KarsaHome".mst_detail_settings`.
+- Dark, clean dev workspace homepage.
+- English site copy unless the user asks otherwise.
+- Project-card search/filter is the current UX.
+- Do not re-add direct CTA buttons like “Open Portfolio” / “Open Hermes Dashboard” unless requested.
+- Logo/signature asset: `/home-assets/karsa_project.png` when available.
 
 ## Safe SQL Pattern
 
-Use `sudo -u postgres psql -d "KarsaHome"` if the current user lacks permission.
+Use:
 
-Example upsert:
+```bash
+sudo -u postgres psql -d "KarsaHome"
+```
+
+Upsert example:
 
 ```sql
 INSERT INTO mst_detail_settings (setting_key, setting_value, updated_at)
 VALUES
-('card_4_title', 'Example Project', now()),
-('card_4_body', 'Short project description.', now()),
-('card_4_url', 'https://example.karsa-dev.my.id/', now()),
-('card_4_image_path', '/home-assets/karsa_project.png', now()),
-('card_4_image_alt', 'Example Project preview', now())
+('card_3_title', 'Example Project', now()),
+('card_3_body', 'Short project description.', now()),
+('card_3_url', 'https://example.karsa-dev.my.id/', now()),
+('card_3_image_path', '/home-assets/karsa_project.png', now()),
+('card_3_image_alt', 'Example Project preview', now())
 ON CONFLICT (setting_key) DO UPDATE
 SET setting_value = EXCLUDED.setting_value,
     updated_at = now();
@@ -116,18 +109,18 @@ SET setting_value = EXCLUDED.setting_value,
 
 ## Verification Checklist
 
-Before reporting Karsa Home changes as done:
+Before reporting Karsa Home work as done:
 
-1. `git status --short` reviewed.
-2. If source changed, run `npm test` when meaningful.
-3. `systemctl is-active karsa-home.service` is active.
+1. `npm test` if source changed.
+2. `nginx -t` if Nginx changed.
+3. `systemctl is-active karsa-home.service`.
 4. `curl http://127.0.0.1:3300/health` returns ok.
 5. `curl https://karsa-dev.my.id/` returns HTTP 200.
-6. If card/content changed, verify the expected text/URL appears in rendered homepage HTML.
-7. Do not commit real credentials, DB passwords, API keys, or tokens.
+6. If cards changed, verify rendered homepage contains expected text/URLs/images and does not contain removed cards.
+7. Confirm no real credentials/secrets are committed or printed.
 
-## Related Projects Linked From Home
+## Related Contexts
 
-- Portfolio context lives in `/opt/projects/mike-portfolio/docs/PROJECT_CONTEXT.md`.
-- KVS context lives in `/opt/projects/kvs-demo-backend/docs/PROJECT_CONTEXT.md` and `/opt/projects/kvs-demo-frontend/docs/PROJECT_CONTEXT.md`.
-- Hermes Dashboard has service/routing context, but do not expose credentials in docs or chat.
+- Portfolio: `/opt/projects/mike-portfolio/docs/PROJECT_CONTEXT.md`
+- KVS backend: `/opt/projects/kvs-demo-backend/docs/PROJECT_CONTEXT.md`
+- KVS frontend: `/opt/projects/kvs-demo-frontend/docs/PROJECT_CONTEXT.md`
