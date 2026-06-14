@@ -61,7 +61,7 @@ Current public cards:
 
 1. Portfolio
    - URL: `https://portfolio.karsa-dev.my.id/`
-   - Image: `/home-assets/portfolio-preview.svg`
+   - Image: `/home-assets/portfolio-preview-v2.svg`
 2. Kanban Verification System
    - URL: `https://kvs-demo.karsa-dev.my.id/`
    - Image: `/home-assets/kvs-preview.svg`
