@@ -57,7 +57,7 @@ async function loadSettings() {
 function projectCards(raw) {
   const grouped = new Map();
   for (const [key, value] of Object.entries(raw)) {
-    const match = key.match(/^card_(\d+)_(title|body|url|image_path|image_alt)$/);
+    const match = key.match(/^card_(\d+)_(title|body|url|image_path|image_alt|active)$/);
     if (!match) continue;
     const [, order, field] = match;
     grouped.set(order, { ...(grouped.get(order) || {}), [field]: value });
@@ -65,7 +65,7 @@ function projectCards(raw) {
   return [...grouped.entries()]
     .sort(([a], [b]) => Number(a) - Number(b))
     .map(([, card]) => card)
-    .filter((card) => card.title && card.url);
+    .filter((card) => card.title && card.url && card.active !== 'false');
 }
 
 function renderCards(raw) {
